@@ -5,3 +5,30 @@
 [0515/114940:ERROR:ssl_client_socket_impl.cc(1141)] handshake failed; returned -1, SSL error code 1, net_error -101
 [0515/114940:ERROR:ssl_client_socket_impl.cc(1141)] handshake failed; returned -1, SSL error code 1, net_error -101
 [0515/115525:WARNING:url_request_job_manager.cc(89)] Failed to map: weixin://resourceid/blank
+[0516/000113:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0516/000114:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0516/202912:WARNING:url_request_job_manager.cc(89)] Failed to map: weixin://resourceid/blank
+[0519/164858:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0519/164903:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0519/190439:WARNING:url_request_job_manager.cc(89)] Failed to map: weixin://resourceid/blank
+[0519/190529:WARNING:url_request_job_manager.cc(89)] Failed to map: weixin://resourceid/blank
+[0520/140819:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0520/154521:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0520/154631:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0520/154636:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0520/154641:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0520/154646:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0520/154651:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0520/154656:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0520/154701:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0520/154706:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0520/154711:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0520/154716:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0520/154721:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0520/154726:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0521/155739:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0523/121951:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0523/121952:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0523/121956:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0523/121956:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
+[0523/121957:WARNING:dns_config_service_win.cc(674)] Failed to read DnsConfig.
