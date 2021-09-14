@@ -1,0 +1,430 @@
+<!DOCTYPE html><html lang="cn" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Flocking for Multi-Agent Dynamic Systems: Algorithms and Theory | Sheldon Zheng</title><meta name="keywords" content="论文笔记"><meta name="author" content="Sheldon Zheng"><meta name="copyright" content="Sheldon Zheng"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Flocking for Multi-Agent Dynamic Systems: Algorithms and Theory In 1986, Reynolds introduced three heuristic rules that led to creation of the first computer animation of flocking [5]. Here, are the t">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flocking for Multi-Agent Dynamic Systems: Algorithms and Theory">
+<meta property="og:url" content="http://sheldon123z.github.io/2021/09/14/Flocking-for-Multi-Agent-Dynamic-Systems-Algorithms-and-Theory/index.html">
+<meta property="og:site_name" content="Sheldon Zheng">
+<meta property="og:description" content="Flocking for Multi-Agent Dynamic Systems: Algorithms and Theory In 1986, Reynolds introduced three heuristic rules that led to creation of the first computer animation of flocking [5]. Here, are the t">
+<meta property="og:locale">
+<meta property="og:image" content="https://source.unsplash.com/random/303x306">
+<meta property="article:published_time" content="2021-09-14T14:53:30.000Z">
+<meta property="article:modified_time" content="2021-09-14T14:55:04.758Z">
+<meta property="article:author" content="Sheldon Zheng">
+<meta property="article:tag" content="论文笔记">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://source.unsplash.com/random/303x306"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://sheldon123z.github.io/2021/09/14/Flocking-for-Multi-Agent-Dynamic-Systems-Algorithms-and-Theory/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: {"limitDay":730,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, memory was good, but the future is more important :)."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"Author: Sheldon Zheng","link":"Link: ","source":"Source: Sheldon Zheng","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-09-14 22:55:04'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><style type="text/css">#toggle-sidebar {left:100px}</style><meta name="generator" content="Hexo 5.0.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/loren.PNG" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-project-diagram"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/%E8%AF%B4%E8%AF%B4/"><i class="fa-fw fa fa-paper-plane"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 分类</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 日志</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲杂时光</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 读书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 个人简历</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/%E8%8B%B1%E6%96%87%E7%AE%80%E5%8E%86/"><i class="fa-fw fas fa-heart"></i><span> English</span></a></li><li><a class="site-page child" href="/%E4%B8%AD%E6%96%87%E7%AE%80%E5%8E%86/"><i class="fa-fw fas fa-heart"></i><span> 中文</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://source.unsplash.com/random/303x300')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Sheldon Zheng</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="/projects/"><i class="fa-fw fas fa-project-diagram"></i><span> 项目</span></a></div><div class="menus_item"><a class="site-page" href="/%E8%AF%B4%E8%AF%B4/"><i class="fa-fw fa fa-paper-plane"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 分类</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 日志</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 闲杂时光</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 读书</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 电影</span></a></li><li><a class="site-page child" href="/games/"><i class="fa-fw fas fa-gamepad"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友情链接</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 个人简历</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/%E8%8B%B1%E6%96%87%E7%AE%80%E5%8E%86/"><i class="fa-fw fas fa-heart"></i><span> English</span></a></li><li><a class="site-page child" href="/%E4%B8%AD%E6%96%87%E7%AE%80%E5%8E%86/"><i class="fa-fw fas fa-heart"></i><span> 中文</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于我</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Flocking for Multi-Agent Dynamic Systems: Algorithms and Theory</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-09-14T14:53:30.000Z" title="Created 2021-09-14 22:53:30">2021-09-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-09-14T14:55:04.758Z" title="Updated 2021-09-14 22:55:04">2021-09-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Flocking for Multi-Agent Dynamic Systems: Algorithms and Theory"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>Flocking for Multi-Agent Dynamic Systems: Algorithms and Theory</h1>
+<p>In 1986, Reynolds introduced three heuristic rules that led to creation of the first computer animation of flocking [5]. Here,<br>
+are the three flocking rules of <strong>Reynolds</strong></p>
+<ol>
+<li>Flock Centering: attempt to stay close to nearby flock mates;  和邻居接近</li>
+<li>Collision Avoidance: avoid collisions with nearby flock mates; 不和邻居碰撞</li>
+<li>Velocity Matching: attempt to match velocity with nearby flock mates  和邻居保持一致的速度</li>
+</ol>
+<p><strong>基本问题：</strong></p>
+<ol>
+<li>
+<p>How do we design scalable flocking algorithms and guarantee their convergence?  如何保持可扩展性而且队形收敛</p>
+</li>
+<li>
+<p>What are the stability analysis problems related to flocking? 稳定性分析因素</p>
+</li>
+<li>
+<p>What types of order exist in flocks? 集群中的秩序有哪些</p>
+</li>
+<li>
+<p>How do flocks perform split/rejoin maneuvers or passthrough narrow spaces? 集群如何变形、分割、以及重聚以飞跃障碍或穿越狭窄空间</p>
+</li>
+<li>
+<p>How do flocks migrate? 集群如何迁移</p>
+</li>
+<li>
+<p>What constitutes flocking?  集群包含什么</p>
+</li>
+</ol>
+<h2 id="知识点汇总">知识点汇总</h2>
+<ol>
+<li>The graph $G$ is said to be undirected if $(i, j) \in \mathcal{E} \Longleftrightarrow(j, i) \in \mathcal{E}$ The quantities $|\mathcal{V}|$ and $|\mathcal{E}|$are, respectively, called <strong>order</strong> and<br>
+<strong>size</strong> of the graph.</li>
+<li>For networked dynamic systems,$|\mathcal{E}|$ is called <strong>communication complexity</strong> of the system.</li>
+<li>Let $q_{i} \in \mathbb{R}^{m}$ denote the position of node $i$ for all $i \in \mathcal{V}$. The vector $q=\operatorname{col}\left(q_{1}, \ldots, q_{n}\right) \in Q=\mathbb{R}^{m n}$ is called the <strong>configuration</strong> of all nodes of the graph.</li>
+</ol>
+<h3 id="创新性："><strong>创新性：</strong></h3>
+<ol>
+<li>提出了新的距离函数$\sigma-Norms$，原因是2范数距离存在不可微分的零点，作者提出的该距离可以定义非负映射从$\mathbb{R^m} \to \mathbb{R}_{\geqslant0}$ ，即从$m$维映射到了1维。</li>
+</ol>
+<p>$$<br>
+|z|_{\sigma}=\frac{1}{\epsilon}\left[\sqrt{1+\epsilon|z|^{2}}-1\right]<br>
+$$</p>
+<p>​	其中：$\epsilon &gt; 0$， 其微分项$\sigma_{\epsilon}(z)=\nabla|z|<em>{\sigma}$为<br>
+$$<br>
+\sigma</em>{\epsilon}(z)=\frac{z}{\sqrt{1+\epsilon|z|^{2}}}=\frac{z}{1+\epsilon|z|_{\sigma}}<br>
+$$</p>
+<ol start="2">
+<li>使用bump function来建立smooth potential functions,避免折点且具有有限cut-off：<br>
+$$<br>
+\rho_{h}(z)= \begin{cases}1, &amp; z \in[0, h) \ \frac{1}{2}\left[1+\cos \left(\pi \frac{(z-h)}{(1-h)}\right)\right], &amp; z \in[h, 1] \ 0, &amp; \text { otherwise }\end{cases}<br>
+$$<br>
+其中，$h\in(0,1)$ ，在$z\in[1,\infin)$ 时，$\rho^<code>_&#123;h&#125;=0 ，而且 |\rho^</code>_{h}(z)|$是均匀分布在在Z上的</li>
+</ol>
+<p><img src= "/img/loading.gif" data-lazy-src="https://i.loli.net/2021/09/03/Fzm31R7H5fkDWYZ.png" alt="image-20210903202908203"></p>
+<ol start="3">
+<li>也因为平滑的特性，继而定义平滑的空间邻接矩阵$A(q)$：</li>
+</ol>
+<p>$$<br>
+a_{i j}(q)=\rho_{h}\left(\left|q_{j}-q_{i}\right|<em>{\sigma} / r</em>{\alpha}\right) \in[0,1], \quad j \neq i<br>
+$$</p>
+<p>​		其中$r_{\alpha} = ||r_{\sigma}||$，对于所有的q和 i，$a_{ii}(q)=0$</p>
+<h2 id="控制器模型："><strong>控制器模型：</strong></h2>
+<p>$$<br>
+u_{i}=f_{i}^{g}+f_{i}^{d}+f_{i}^{\gamma}<br>
+$$</p>
+<p>$f_{i}^{g}=-\nabla_{q_{i}} V(q)$是微分项，代表对势能的微分，形成内部斥力</p>
+<p>$f^d_i$是速度共识，代表形成共同的速度</p>
+<p>$f^{\gamma}_i$是对群体目标的反馈</p>
+<p>三种算法：</p>
+<h3 id="alpha-alpha-text-flocking-protocol-控制器：">$(\alpha, \alpha)\text{flocking protocol} $ 控制器：</h3>
+<p>这种控制器只为形成$\alpha -lattice$,即形成集群晶格，但是没有统一的目标和避障约束，所以容易分散，破碎成大小不同的若干个集群。</p>
+<p>Algorithm 1: $u_{i}=u_{i}^{\alpha}$<br>
+$$<br>
+u_{i}^{\alpha}=\underbrace{\sum_{j \in N_{i}} \phi_{\alpha}\left(\left|q_{j}-q_{i}\right|<em>{\sigma}\right) \mathbf{n}</em>{i j}}<em>{\text {gradient-based term }}+\underbrace{\sum</em>{j \in N_{i}} a_{i j}(q)\left(p_{j}-p_{i}\right)}<em>{\text {consensus term }}<br>
+\<br>
+\mathbf{n}</em>{i j}=\sigma_{\epsilon}\left(q_{j}-q_{i}\right)=\left(q_{j}-q_{i} / \sqrt{1+\epsilon\left|q_{j}-q_{i}\right|^{2}}\right)<br>
+$$</p>
+<h3 id="带群体目标的控制器：">带群体目标的控制器：</h3>
+<p>Algorithm 2: $u_{i}=u_{i}^{\alpha}+u_{i}^{\gamma}$, or<br>
+$$<br>
+\begin{array}{r}<br>
+u_{i}=\sum_{j \in N_{i}} \phi_{\alpha}\left(\left|q_{j}-q_{i}\right|<em>{\sigma}\right) \mathbf{n}</em>{i j}+\sum_{j \in N_{i}} a_{i j}(q)\left(p_{j}-p_{i}\right) \<br>
++f_{i}^{\gamma}\left(q_{i}, p_{i}, q_{r}, p_{r}\right)<br>
+\end{array}<br>
+$$</p>
+<p>$$<br>
+\begin{aligned}<br>
+u_{i}^{\gamma} &amp;:=f_{i}^{\gamma}\left(q_{i}, p_{i}, q_{r}, p_{r}\right) \<br>
+&amp;=-c_{1}\left(q_{i}-q_{r}\right)-c_{2}\left(p_{i}-p_{r}\right)<br>
+\end{aligned}<br>
+$$</p>
+<p>$$<br>
+\left(q_{r}, p_{r}\right) \in \mathbb{R}^{m} \times \mathbb{R}^{m} \text { is the state of a } \gamma \text {-agent. }<br>
+$$</p>
+<p>对于一个动态的$\gamma-\text{agent}$来说，可以有下列形式的控制器：<br>
+$$<br>
+\left{\begin{array}{l}<br>
+\dot{q}<em>{r}=p</em>{r} \<br>
+\dot{p}<em>{r}=f</em>{r}\left(q_{r}, p_{r}\right)<br>
+\end{array}\right.<br>
+$$<br>
+如果$\dot{p}_{r}=0$，则说明加速度为0，即集群将以一个固定的速度运动至固定目标点</p>
+<h3 id="带避障的控制器">带避障的控制器</h3>
+<p>$$<br>
+\begin{aligned}<br>
+u_{i}^{\alpha}=&amp; c_{1}^{\alpha} \sum_{j \in N_{i}^{\alpha}} \phi_{\alpha}\left(\left|q_{j}-q_{i}\right|<em>{\sigma}\right) \mathbf{n}</em>{i, j} \<br>
+&amp;+c_{2}^{\alpha} \sum_{j \in N_{i}^{\alpha}} a_{i j}(q)\left(p_{j}-p_{i}\right) \\<br>
+u_{i}^{\beta}=&amp; c_{1}^{\beta} \sum_{k \in N_{i}^{\beta}} \phi_{\beta}\left(\left|\hat{q}<em>{i, k}-q</em>{i}\right|<em>{\sigma}\right) \hat{\mathbf{n}}</em>{i, k} \<br>
+&amp;+c_{2}^{\beta} \sum_{j \in N_{i}^{\beta}} b_{i, k}(q)\left(\hat{p}<em>{i, k}-p</em>{i}\right) \\<br>
+u_{i}^{\gamma}=&amp;-c_{1}^{\gamma} \sigma_{1}\left(q_{i}-q_{r}\right)-c_{2}^{\gamma}\left(p_{i}-p_{r}\right)<br>
+\end{aligned}<br>
+$$</p>
+<p>其中：<br>
+$$<br>
+\mathbf{n}<em>{i j}=\frac{q</em>{j}-q_{i}}{\sqrt{1+\epsilon\left|q_{j}-q_{i}\right|^{2}}} \quad \hat{\mathbf{n}}<em>{i, k}=\frac{\hat{q}</em>{i, k}-q_{i}}{\sqrt{1+\epsilon\left|\hat{q}<em>{i, k}-q</em>{i}\right|^{2}}}<br>
+$$<br>
+这种控制器的难点是在于获取$\gamma \text{-agent}$的位置信息，对于圆型二维障碍物而言，可以有如下定论：</p>
+<p>i) 对于一个拥有超平面边界且单位正交向量为 $\mathbf{a}<em>{k}$的障碍物， 并且该障碍物有点穿过位置 $y</em>{k}$, 则相对应的 $\beta$-agent 可以被确定为<br>
+$$<br>
+\hat{q}<em>{i, k}=P q</em>{i}+(I-P) y_{k} \quad \hat{p}<em>{i, k}=P p</em>{i}<br>
+$$<br>
+$P=I-\mathbf{a}<em>{k} \mathbf{a}</em>{k}^{T}$ 是映射矩阵（Projection matrix）</p>
+<p>ii) 对于以 $R_{k}$为半径，中心点在 $y_{k}$的障碍物,  $\beta$-agent的位置速度为：<br>
+$$<br>
+\hat{q}<em>{i, k}=\mu q</em>{i}+(1-\mu) y_{k} \quad \hat{p}<em>{i, k}=\mu P p</em>{i}<br>
+$$<br>
+where $\mu=R_{k} /\left|q_{i}-y_{k}\right|, \mathbf{a}<em>{k}=\left(q</em>{i}-y_{k}\right) /\left|q_{i}-y_{k}\right|$, and $P=I-\mathbf{a}<em>{k} \mathbf{a}</em>{k}^{T}$</p>
+<p>代码使用的是定论2</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Sheldon Zheng</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://sheldon123z.github.io/2021/09/14/Flocking-for-Multi-Agent-Dynamic-Systems-Algorithms-and-Theory/">http://sheldon123z.github.io/2021/09/14/Flocking-for-Multi-Agent-Dynamic-Systems-Algorithms-and-Theory/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">论文笔记</a></div><div class="post_share"><div class="social-share" data-image="https://source.unsplash.com/random/303x306" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> Donate</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/pics/wechat.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/pics/wechat.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="/pics/alipay.jpg" target="_blank"><img class="post-qr-code-img" data-lazy-src="/pics/alipay.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/09/14/%E5%8D%8F%E5%90%8C%E6%8E%A7%E5%88%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><img class="next-cover" data-lazy-src="https://source.unsplash.com/random/303x304" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">协同控制学习笔记</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/loren.PNG" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">Sheldon Zheng</div><div class="author-info__description">男儿千年志，吾生未有涯</div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">15</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">11</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">3</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/sheldon123z"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/sheldon123z" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:xiaodong_zheng@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.linkedin.com/in/xiaodong-zheng/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a><a class="social-icon" href="/281309467" target="_blank" title="QQ"><i class="fab fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">欢迎来到郑晓东的博客</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">Flocking for Multi-Agent Dynamic Systems: Algorithms and Theory</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB"><span class="toc-number">1.1.</span> <span class="toc-text">知识点汇总</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E6%96%B0%E6%80%A7%EF%BC%9A"><span class="toc-number">1.1.1.</span> <span class="toc-text">创新性：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E5%99%A8%E6%A8%A1%E5%9E%8B%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">控制器模型：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#alpha-alpha-text-flocking-protocol-%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%9A"><span class="toc-number">1.2.1.</span> <span class="toc-text">$(\alpha, \alpha)\text{flocking protocol} $ 控制器：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6%E7%BE%A4%E4%BD%93%E7%9B%AE%E6%A0%87%E7%9A%84%E6%8E%A7%E5%88%B6%E5%99%A8%EF%BC%9A"><span class="toc-number">1.2.2.</span> <span class="toc-text">带群体目标的控制器：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6%E9%81%BF%E9%9A%9C%E7%9A%84%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-number">1.2.3.</span> <span class="toc-text">带避障的控制器</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/09/14/Flocking-for-Multi-Agent-Dynamic-Systems-Algorithms-and-Theory/" title="Flocking for Multi-Agent Dynamic Systems: Algorithms and Theory"><img data-lazy-src="https://source.unsplash.com/random/303x306" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Flocking for Multi-Agent Dynamic Systems: Algorithms and Theory"/></a><div class="content"><a class="title" href="/2021/09/14/Flocking-for-Multi-Agent-Dynamic-Systems-Algorithms-and-Theory/" title="Flocking for Multi-Agent Dynamic Systems: Algorithms and Theory">Flocking for Multi-Agent Dynamic Systems: Algorithms and Theory</a><time datetime="2021-09-14T14:53:30.000Z" title="Created 2021-09-14 22:53:30">2021-09-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/09/14/%E5%8D%8F%E5%90%8C%E6%8E%A7%E5%88%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="协同控制学习笔记"><img data-lazy-src="https://source.unsplash.com/random/303x304" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="协同控制学习笔记"/></a><div class="content"><a class="title" href="/2021/09/14/%E5%8D%8F%E5%90%8C%E6%8E%A7%E5%88%B6%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="协同控制学习笔记">协同控制学习笔记</a><time datetime="2021-09-14T14:19:46.000Z" title="Created 2021-09-14 22:19:46">2021-09-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/15/PCA%E5%88%86%E6%9E%90/" title="PCA分析"><img data-lazy-src="https://source.unsplash.com/random/303x305" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PCA分析"/></a><div class="content"><a class="title" href="/2021/05/15/PCA%E5%88%86%E6%9E%90/" title="PCA分析">PCA分析</a><time datetime="2021-05-15T15:53:03.000Z" title="Created 2021-05-15 23:53:03">2021-05-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/13/SVD%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3/" title="SVD奇异值分解"><img data-lazy-src="https://source.unsplash.com/random/303x295" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SVD奇异值分解"/></a><div class="content"><a class="title" href="/2021/05/13/SVD%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3/" title="SVD奇异值分解">SVD奇异值分解</a><time datetime="2021-05-13T15:39:09.000Z" title="Created 2021-05-13 23:39:09">2021-05-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/11/SVD%E5%85%B3%E9%94%AE%E7%A7%A9r%E5%88%86%E7%95%8C%E7%BA%BF%E9%80%89%E5%8F%96/" title="SVD关键秩r分界线选取"><img data-lazy-src="https://source.unsplash.com/random/303x299" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SVD关键秩r分界线选取"/></a><div class="content"><a class="title" href="/2021/05/11/SVD%E5%85%B3%E9%94%AE%E7%A7%A9r%E5%88%86%E7%95%8C%E7%BA%BF%E9%80%89%E5%8F%96/" title="SVD关键秩r分界线选取">SVD关键秩r分界线选取</a><time datetime="2021-05-11T03:01:43.000Z" title="Created 2021-05-11 11:01:43">2021-05-11</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://source.unsplash.com/random/303x300')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By Sheldon Zheng</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">How are you? I am fine, thank you, and you?</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      true && mermaid.init()
+    })
+  }
+}</script></div><div class="aplayer no-destroy" data-id="323070469" data-server="netease" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="true" data-order="random" data-preload="none" data-autoplay="true" muted></div><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"]):not([href="-"]):not([href="/"]):not([href="a"]):not([href="r"]):not([href="t"]):not([href="i"]):not([href="t"]):not([href="a"]):not([href="l"]):not([href="k"]):not([href="/"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+
+document.addEventListener('pjax:send', function () {
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
