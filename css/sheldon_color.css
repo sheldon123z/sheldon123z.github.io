@@ -1,0 +1,98 @@
+<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>/* 颜色 */
+:root {
+    --sheldon-theme-op: #4259ef23;
+    --sheldon-gray-op: #9999992b;
+    --sheldon-theme-top: var(--sheldon-theme);
+    --sheldon-white: #fff;
+    --sheldon-white-op: rgba(255, 255, 255, 0.2);
+    --sheldon-black: #000;
+    --sheldon-black-op: rgba(0, 0, 0, 0.2);
+    --sheldon-none: rgba(0, 0, 0, 0);
+    --sheldon-gray: #999999;
+    --sheldon-yellow: #ffc93e;
+    --sheldon-border-radius: 8px;
+    --sheldon-main: var(--sheldon-theme);
+    --sheldon-main-op: var(--sheldon-theme-op);
+    --sheldon-shadow-theme: 0 8px 12px -3px var(--sheldon-theme-op);
+    --sheldon-shadow-main: 0 8px 12px -3px var(--sheldon-main-op);
+    --sheldon-shadow-blue: 0 8px 12px -3px rgba(40, 109, 234, 0.2);
+    --sheldon-shadow-white: 0 8px 12px -3px rgba(255, 255, 255, 0.2);
+    --sheldon-shadow-black: 0 0 12px 4px rgba(0, 0, 0, 0.05);
+    --sheldon-shadow-yellow: 0px 38px 77px -26px rgba(255, 201, 62, 0.12);
+    --sheldon-shadow-red: 0 8px 12px -3px #ee7d7936;
+    --sheldon-shadow-green: 0 8px 12px -3px #87ee7936;
+    --sheldon-shadow-border: 0 8px 16px -4px #2c2d300c;
+    --sheldon-shadow-blackdeep: 0 2px 16px -3px rgba(0, 0, 0, 0.15);
+    --sheldon-logo-color: linear-gradient(215deg, #4584ff 30%, #ff7676 70%);
+    --style-border: 1px solid var(--sheldon-card-border);
+    --sheldon-blue-main: #3b70fc;
+    --style-border-hover: 1px solid var(--sheldon-main);
+    --style-border-dashed: 1px dashed var(--sheldon-theme-op);
+    --style-border-avatar: 4px solid var(--sheldon-background);
+    --style-border-always: 1px solid var(--sheldon-card-border);
+    --style-border-none: 1px solid transparent;
+    --sheldon-white-acrylic1: #fefeff !important;
+    --sheldon-white-acrylic2: #fcfdff !important;
+    --sheldon-black-acrylic2: #08080a !important;
+    --sheldon-black-acrylic1: #0b0b0e !important;
+    --sheldon-main-none: #b8b8b800 !important;
+  }
+  
+  [data-theme="light"] {
+    --sheldon-theme: #3b70fc;
+    --sheldon-theme-deep: #1856fb;
+    --sheldon-theme-op: #4259ef23;
+    --sheldon-blue: #3b70fc;
+    --sheldon-red: #d8213c;
+    --sheldon-pink: #ff7c7c;
+    --sheldon-green: #57bd6a;
+    --sheldon-fontcolor: #363636;
+    --sheldon-background: #f7f9fe;
+    --sheldon-reverse: #000;
+    --sheldon-maskbg: rgba(255, 255, 255, 0.6);
+    --sheldon-maskbgdeep: rgba(255, 255, 255, 0.85);
+    --sheldon-hovertext: var(--sheldon-theme);
+    --sheldon-ahoverbg: #f7f7fa;
+    --sheldon-lighttext: var(--sheldon-main);
+    --sheldon-secondtext: rgba(60, 60, 67, 0.6);
+    --sheldon-scrollbar: rgba(60, 60, 67, 0.4);
+    --sheldon-card-btn-bg: #edf0f7;
+    --sheldon-post-blockquote-bg: #fafcff;
+    --sheldon-post-tabs-bg: #f2f5f8;
+    --sheldon-secondbg: #f1f3f8;
+    --sheldon-shadow-nav: 0 5px 12px -5px rgba(102, 68, 68, 0.05);
+    --sheldon-card-bg: #fff;
+    --sheldon-shadow-lightblack: 0 5px 12px -5px rgba(102, 68, 68, 0);
+    --sheldon-shadow-light2black: 0 5px 12px -5px rgba(102, 68, 68, 0);
+    --sheldon-card-border: #e3e8f7;
+  }
+  
+  [data-theme="dark"] {
+    --global-bg: #191919;
+    --sheldon-theme: #0084ff;
+    --sheldon-theme-deep: #0076e5;
+    --sheldon-theme-op: #0084ff23;
+    --sheldon-blue: #0084ff;
+    --sheldon-red: #ff3842;
+    --sheldon-pink: #ff7c7c;
+    --sheldon-green: #57bd6a;
+    --sheldon-fontcolor: #f7f7fa;
+    --sheldon-background: #18171d;
+    --sheldon-reverse: #fff;
+    --sheldon-maskbg: rgba(0, 0, 0, 0.6);
+    --sheldon-maskbgdeep: rgba(0, 0, 0, 0.85);
+    --sheldon-hovertext: #0a84ff;
+    --sheldon-ahoverbg: #fff;
+    --sheldon-lighttext: #f2b94b;
+    --sheldon-secondtext: #a1a2b8;
+    --sheldon-scrollbar: rgba(200, 200, 223, 0.4);
+    --sheldon-card-btn-bg: #30343f;
+    --sheldon-post-blockquote-bg: #000;
+    --sheldon-post-tabs-bg: #121212;
+    --sheldon-secondbg: #30343f;
+    --sheldon-shadow-nav: 0 5px 20px 0px rgba(28, 28, 28, 0.4);
+    --sheldon-card-bg: #1d1b26;
+    --sheldon-shadow-lightblack: 0 5px 12px -5px rgba(102, 68, 68, 0);
+    --sheldon-shadow-light2black: 0 5px 12px -5px rgba(102, 68, 68, 0);
+    --sheldon-card-border: #42444a;
+  }
