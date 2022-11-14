@@ -96,6 +96,7 @@
   --sheldon-shadow-light2black: 0 5px 12px -5px rgba(102, 68, 68, 0);
   --sheldon-card-border: #42444a;
 }
+
 /* @font-face {
   font-family: Candyhome;
   src: url(https://npm.elemecdn.com/anzhiyu-blog@1.1.6/fonts/Candyhome.ttf);
@@ -112,10 +113,12 @@
 div#menus {
   font-family: "ZhuZiAYuanJWD";
 }
+
 h1#site-title {
   font-family: San Francisco;
   font-size: 5em !important;
 }
+
 a.article-title,
 a.blog-slider__title,
 a.categoryBar-list-link,
@@ -160,17 +163,21 @@ svg.icon {
   color: var(--sheldon-ahoverbg);
   border-radius: 10px;
 }
+
 a.bangumi-tab:hover {
   text-decoration: none !important;
 }
+
 .bangumi-button:hover {
   background: var(--sheldon-theme) !important;
   border-radius: 10px !important;
   color: var(--sheldon-ahoverbg) !important;
 }
+
 a.bangumi-button.bangumi-nextpage:hover {
   text-decoration: none !important;
 }
+
 .bangumi-button {
   padding: 5px 10px !important;
 }
@@ -178,21 +185,25 @@ a.bangumi-button.bangumi-nextpage:hover {
 a.bangumi-tab {
   padding: 5px 10px !important;
 }
+
 svg.icon.faa-tada {
   font-size: 1.1em;
 }
+
 .bangumi-info-item {
   border-right: 1px solid #f2b94b;
 }
+
 .bangumi-info-item span {
   color: #f2b94b;
 }
+
 .bangumi-info-item em {
   color: #f2b94b;
 }
 
 /* 解决artitalk的图标问题 */
-#uploadSource > svg {
+#uploadSource>svg {
   width: 1.19em;
   height: 1.5em;
 }
@@ -203,8 +214,9 @@ svg.icon.faa-tada {
 }
 
 /* 首页文章卡片 */
-#recent-posts > .recent-post-item {
+#recent-posts>.recent-post-item {
   background: rgba(255, 255, 255, 0.9);
+  /* border: 2px solid #0076e5; */
 }
 
 /* 首页侧栏卡片 */
@@ -242,7 +254,7 @@ div#projects {
 }
 
 /*夜间模式伪类遮罩层透明*/
-[data-theme="dark"] #recent-posts > .recent-post-item {
+[data-theme="dark"] #recent-posts>.recent-post-item {
   background: #121212;
 }
 
@@ -273,6 +285,7 @@ div#projects {
 [data-theme="dark"] div#category {
   background: transparent !important;
 }
+
 /* 页脚透明 */
 #footer {
   background: transparent !important;
@@ -283,7 +296,7 @@ div#projects {
   background: transparent !important;
 }
 
-#rightside > div > button {
+#rightside>div>button {
   border-radius: 5px;
 }
 
@@ -353,6 +366,7 @@ div#projects {
 body {
   cursor: url("/img/x1.cur"), auto;
 }
+
 a,
 [type="button"]:not(:disabled),
 [type="reset"]:not(:disabled),
@@ -360,6 +374,7 @@ a,
 button:not(:disabled) {
   cursor: url("/img/x2.cur"), auto !important;
 }
+
 /* md网站下划线 */
 #article-container a:hover {
   text-decoration: none !important;
@@ -413,15 +428,18 @@ button:not(:disabled) {
   font-size: 14px;
   font-family: Titillium Web, "PingFang SC", "Hiragino Sans GB", "Microsoft JhengHei", "Microsoft YaHei", sans-serif;
 }
+
 #error-wrap .error-content .error-info .error_title {
   margin-top: -4rem;
   font-size: 9em;
 }
+
 #error-wrap .error-content .error-info .error_subtitle {
   margin-top: -3.5rem;
   word-break: break-word;
   font-size: 1.6em;
 }
+
 #error-wrap .error-content .error-info a {
   display: inline-block;
   margin-top: 0.5rem;
